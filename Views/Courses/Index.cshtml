@@ -1,0 +1,61 @@
+@{
+    ViewData["Title"] = "Home Page"; // Denna måste också ändras från NUll till det som är default för alla sidor
+}
+@model List<Course>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<style>
+    .list-group-item {
+        /* Add your custom styles here */
+        background-color: #f8f9fa; /* Example background color */
+        color: #007bff; /* Example text color */
+    }
+</style>
+
+<body>
+    <div class="row">
+        <h2>Available Courses</h2>
+    </div>
+
+
+    <div>
+        <div>
+           <table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th><h2>Course</h2></th>
+            <th><h2>Description</h2></th>
+            <th><h2>Starting Date</h2></th>
+            <th><h2>Ending Date</h2></th>
+        </tr>
+    </thead>
+
+    <tbody class>
+        @foreach (var obj in Model.OrderBy(u => u.Id))
+        {
+            <tr class="table-hover">
+                <td>@obj.Title</td>
+                <td>@obj.Description</td>
+                <td>@obj.StartDate</td>
+                <td>@obj.EndDate</td>
+                <td><a asp-controller="Courses" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary">Edit <i class="bi bi-pencil-square"></i></a></td>
+                <td><a asp-controller="Courses" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger">Delete <i class="bi bi-trash"></i></a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+        </div>
+    </div>
+
+    <div>
+        <a asp-controller="Courses" asp-action="Create" class= "btn btn-success">Add Course</a>
+    </div>
+</body>
+</html>
